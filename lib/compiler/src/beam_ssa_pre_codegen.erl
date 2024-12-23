@@ -1335,7 +1335,10 @@ phi_predecessors(L, Blocks) ->
 %%  Test whether block Label is dominated by block DominatedBy.
 
 is_dominated_by(L, DomBy, Doms) ->
+    io:format("is_dominated_by", []),
+    erlang:display(L),
     DominatedBy = map_get(L, Doms),
+    erlang:display(DominatedBy),
     member(DomBy, DominatedBy).
 
 %% need_frame(#b_blk{}) -> true|false.
