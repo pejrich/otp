@@ -1335,11 +1335,13 @@ phi_predecessors(L, Blocks) ->
 %%  Test whether block Label is dominated by block DominatedBy.
 
 is_dominated_by(L, DomBy, Doms) ->
-    io:format("is_dominated_by", []),
-    erlang:display(L),
+    St = os:system_time(),
     DominatedBy = map_get(L, Doms),
-    erlang:display(DominatedBy),
-    member(DomBy, DominatedBy).
+    Res = member(DomBy, DominatedBy),
+    Du = os:system_time() - St,
+    io:format("~p : ~p : ~p : ~p : ~p~n", [Du, Res, L, DominatedBy, DomBy]),
+    Res.
+
 
 %% need_frame(#b_blk{}) -> true|false.
 %%  Test whether any of the instructions in the block requires a stack frame.
